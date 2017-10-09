@@ -10,6 +10,6 @@ end
 
 # Setup jboss as serice
 service "jboss" do 
-  supports :start => true, :stop => true
+  supports :start => true, :stop => true, :restart => true
   action [:enable, :start]
 end

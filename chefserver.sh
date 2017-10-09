@@ -20,6 +20,7 @@ sudo dpkg -i 'chef_13.5.3-1_amd64.deb'
 echo "================ Download and install deb chef-dk package ================"
 wget https://packages.chef.io/files/stable/chefdk/2.3.4/ubuntu/14.04/chefdk_2.3.4-1_amd64.deb
 sudo dpkg -i 'chefdk_2.3.4-1_amd64.deb'
+sudo apt-get update
 sudo apt-get -y install git
 sudo apt-get -y install unzip
 mkdir /root/.chef
