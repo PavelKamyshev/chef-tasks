@@ -27,21 +27,29 @@
             #sudo -u jboss sh ${JBOSS_HOME}/bin/standalone.sh $AS7_OPTS           ##  If running as user "jboss"  
             #start-stop-daemon --start --quiet --background --chuid jboss --exec ${JBOSS_HOME}/bin/standalone.sh -- $AS7_OPTS   ## Ubuntu  
             ${JBOSS_HOME}/bin/standalone.sh> /dev/null 2>&1 $AS7_OPTS &  
-			echo "service starting"
+			echo "JBoss AS 7 start"
         ;;  
         stop)  
             echo "Stopping JBoss AS 7..."  
             #sudo -u jboss sh ${JBOSS_HOME}/bin/jboss-admin.sh --connect command=:shutdown            ##  If running as user "jboss"  
             #start-stop-daemon --start --quiet --background --chuid jboss --exec ${JBOSS_HOME}/bin/jboss-admin.sh -- --connect command=:shutdown     ## Ubuntu  
             ${JBOSS_HOME}/bin/jboss-cli.sh --connect command=:shutdown> /dev/null 2>&1
+			echo "JBoss AS 7 stop"
         ;;
-		restart)
-			 echo "Restarting JBoss AS 7..."
-			 ${JBOSS_HOME}/bin/jboss-cli.sh --connect --command=:reload> /dev/null 2>&1
+		reload)
+			echo "Reloading JBoss AS 7..."
+			${JBOSS_HOME}/bin/jboss-cli.sh --connect --command=:reload> /dev/null 2>&1
+			echo "JBoss AS 7 reload"
+			 
 		;;
-
+		restart)
+			echo "Restarting JBoss AS 7..."
+			${JBOSS_HOME}/bin/jboss-cli.sh --connect command=:shutdown> /dev/null 2>&1
+			${JBOSS_HOME}/bin/standalone.sh> /dev/null 2>&1 $AS7_OPTS &
+			echo "JBoss AS 7 restart"
+		;;
 	    *)  
-            echo "Usage: /etc/init.d/jbossas7 {start|stop|restart}"; exit 1;  
+            echo "Usage: /etc/init.d/jbossas7 {start|reload|stop|restart}"; exit 1;  
         ;;  
     esac  
       
